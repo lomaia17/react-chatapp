@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import userIcon from "../assets/icons8-male-user-48.png";
 import turnOffIcon from "../assets/power-xxl.png";
 import io from "socket.io-client";
@@ -17,6 +17,7 @@ const Chat = () => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const bottomRef = useRef();
   let location = useLocation();
   const ENDPOINT = "http://localhost:5000";
   useEffect(() => {
@@ -32,6 +33,10 @@ const Chat = () => {
         alert(error);
       }
     });
+    return () => {
+      socket.disconnect();
+      socket.off();
+    };
   }, [ENDPOINT, location.search]);
 
   useEffect(() => {
@@ -41,30 +46,41 @@ const Chat = () => {
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
-  }, [messages]);
+  }, []);
 
   const sendMessage = (event) => {
     event.preventDefault();
-
     if (message) {
-      socket.emit("sendMessage", message, () => setMessage(""));
+      socket.emit("sendMessage", message, () => {
+        setMessage("");
+      });
     }
+    event.target.value = null;
   };
+  useEffect(() => {
+    bottomRef.current.scrollIntoView({ behavior: "smooth" });
+  });
 
   return (
     <div className="h-screen w-full bg-gray-800 flex justify-center items-center">
       <div className="flex h-3/4 w-3/4 ">
+        {console.log(users)}
         <SideBar users={users} userIcon={userIcon} />
         <div className="bg-gray-900 h-full w-3/4  py-5 px-5 flex flex-col justify-between">
           <TopBar turnOffIcon={turnOffIcon} room={room} />
-          <div className="overflow-y-auto">
+          <div className="scrollbar mt-2">
             {messages.map((message, i) => (
-              <Message message={message} key={i} />
+              <Message message={message} name={name} key={i} />
             ))}
+            <div ref={bottomRef}></div>
           </div>
 
           <div className="flex">
-            <Input setMessage={setMessage} sendMessage={sendMessage} />
+            <Input
+              message={message}
+              setMessage={setMessage}
+              sendMessage={sendMessage}
+            />
           </div>
         </div>
       </div>

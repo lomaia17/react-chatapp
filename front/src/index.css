@@ -8,6 +8,7 @@ body {
   font-family: "Poppins", "BPG Arial";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scrollbar-width: none;
 }
 
 code {

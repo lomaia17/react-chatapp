@@ -1,11 +1,12 @@
 import React from "react";
 
-const Input = ({ setMessage, sendMessage }) => {
+const Input = ({ message, setMessage, sendMessage }) => {
   return (
     <>
       <input
         type="text"
         placeholder="Write your message!"
+        value={message}
         className="w-full focus:outline-none focus:placeholder-gray-300 text-white placeholder-gray-400 pl-12 bg-gray-800 rounded-xl py-2 mr-2"
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={(event) =>
@@ -16,7 +17,9 @@ const Input = ({ setMessage, sendMessage }) => {
         <button
           type="button"
           className="inline-flex items-center justify-center rounded-xl px-3 py-3 transition duration-500 ease-in-out text-white bg-purple-800 hover:bg-purple-900 focus:outline-none"
-          onClick={(e) => sendMessage(e)}
+          onClick={(event) => {
+            sendMessage(event);
+          }}
         >
           <span>Send</span>
           <svg

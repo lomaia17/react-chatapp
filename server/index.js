@@ -21,13 +21,12 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const user = addUser({ id: socket.id, name, room });
-
     socket.join(user.room);
-
     socket.emit("message", {
       user: "Admin",
       text: `${user.name}, welcome to room ${user.room}.`,
     });
+
     socket.broadcast
       .to(user.room)
       .emit("message", { user: "Admin", text: `${user.name} has joined!` });
@@ -36,7 +35,6 @@ io.on("connection", (socket) => {
       room: user.room,
       users: getUsersInRoom(user.room),
     });
-
     callback();
   });
   socket.on("sendMessage", (message, callback) => {
