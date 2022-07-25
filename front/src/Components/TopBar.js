@@ -1,8 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-const TopBar = ({ turnOffIcon, room }) => {
+
+const TopBar = ({ turnOffIcon, room, toggleUsers, isActive }) => {
   return (
-    <div className="flex justify-between items-center">
+    <div className="flex justify-between items-center" onClick={toggleUsers}>
       <p className="text-white flex">
         <svg
           xmlns="http://www.w3.org/2000/svg"

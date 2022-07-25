@@ -13,7 +13,7 @@ const Input = ({ message, setMessage, sendMessage }) => {
           event.key === "Enter" ? sendMessage(event) : null
         }
       />
-      <div className="items-center inset-y-0 hidden sm:flex">
+      <div className="items-center inset-y-0 sm:flex">
         <button
           type="button"
           className="inline-flex items-center justify-center rounded-xl px-3 py-3 transition duration-500 ease-in-out text-white bg-purple-800 hover:bg-purple-900 focus:outline-none"
