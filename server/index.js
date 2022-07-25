@@ -21,6 +21,8 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const user = addUser({ id: socket.id, name, room });
+    const error = addUser({ id: socket.id, name, room });
+    if (error) return callback(error);
     socket.join(user.room);
     socket.emit("message", {
       user: "Admin",
