@@ -17,9 +17,12 @@ const Chat = () => {
   const [users, setUsers] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const [isActive, setIsActive] = useState(
+    window.innerWidth < 900 ? false : true
+  );
   const bottomRef = useRef();
   let location = useLocation();
-  const ENDPOINT = "localhost:5000";
+  const ENDPOINT = "https://gl-chatapp.herokuapp.com/";
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
 
@@ -61,7 +64,7 @@ const Chat = () => {
   useEffect(() => {
     bottomRef.current.scrollIntoView({ behavior: "smooth" });
   });
-  const [isActive, setIsActive] = useState(true);
+
   const toggleUsers = () => {
     if (window.innerWidth < 900) {
       setIsActive(!isActive);
