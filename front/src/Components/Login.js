@@ -4,7 +4,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [room, setRoom] = useState("");
   return (
-    <div className="min-h-screen bg-gray-800 flex justify-center items-center">
+    <div className="h-full bg-gray-800 flex justify-center items-center">
       <div className="py-10 px-12 bg-gray-900 rounded-2xl shadow-xl z-20 w-11/12 lg:w-1/3">
         <div>
           <h1 className="text-3xl text-white font-bold text-center mb-4 cursor-pointer">

@@ -71,8 +71,8 @@ const Chat = () => {
     }
   };
   return (
-    <div className="h-screen bg-gray-800 flex justify-center items-center">
-      <div className="flex h-screen w-screen lg:h-3/4 lg:w-3/4 ">
+    <div className="h-full bg-gray-800 flex justify-center items-center">
+      <div className="flex h-full w-screen lg:h-3/4 lg:w-3/4 ">
         {isActive && (
           <SideBar users={users} userIcon={userIcon} isActive={isActive} />
         )}
