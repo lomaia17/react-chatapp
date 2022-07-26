@@ -6,14 +6,14 @@ const cors = require("cors");
 const { Server } = require("socket.io");
 const router = require("./router");
 const server = http.createServer(app);
-const PORT = process.emit.PORT || 5000;
+const PORT = process.env.PORT || 5000;
 
 const { addUser, removeUser, getUser, getUsersInRoom } = require("./users");
 
 app.use(cors());
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: "*",
     methods: ["GET", "POST"],
   },
 });
@@ -21,8 +21,6 @@ const io = new Server(server, {
 io.on("connection", (socket) => {
   socket.on("join", ({ name, room }, callback) => {
     const user = addUser({ id: socket.id, name, room });
-    const error = addUser({ id: socket.id, name, room });
-    if (error) return callback(error);
     socket.join(user.room);
     socket.emit("message", {
       user: "Admin",

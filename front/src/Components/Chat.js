@@ -19,7 +19,7 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const bottomRef = useRef();
   let location = useLocation();
-  const ENDPOINT = "http://localhost:5000";
+  const ENDPOINT = "localhost:5000";
   useEffect(() => {
     const { name, room } = queryString.parse(location.search);
 
@@ -48,7 +48,7 @@ const Chat = () => {
     socket.on("roomData", ({ users }) => {
       setUsers(users);
     });
-  }, [messages]);
+  }, []);
   const sendMessage = (event) => {
     event.preventDefault();
     if (message) {
