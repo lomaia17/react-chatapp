@@ -7,7 +7,7 @@ const Input = ({ message, setMessage, sendMessage }) => {
         type="text"
         placeholder="Write your message!"
         value={message}
-        className="w-full focus:outline-none focus:placeholder-gray-300 text-white placeholder-gray-400 pl-12 bg-gray-800 rounded-xl py-2 mr-2"
+        className="w-full focus:outline-none focus:placeholder-gray-300 text-white placeholder-gray-400 pl-5 pr-2 lg:pl-12 pr-0.25 bg-gray-800 rounded-xl py-2 mr-2"
         onChange={(e) => setMessage(e.target.value)}
         onKeyPress={(event) =>
           event.key === "Enter" ? sendMessage(event) : null
